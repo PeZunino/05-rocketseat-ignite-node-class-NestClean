@@ -1,4 +1,4 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { z } from 'zod';
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions';
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
@@ -26,8 +26,8 @@ export class FetchRecentQuestionsController {
 	async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
 		const result = await this.fetchRecentQuestionsService.execute({page});
 
-		if(result.isLeft()){
-			throw new Error('Error');
+		if (result.isLeft()) {
+			throw new BadRequestException();
 		}
 
 		const questions = result.value.questions;
