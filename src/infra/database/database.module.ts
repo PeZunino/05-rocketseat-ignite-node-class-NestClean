@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
+import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-answer-attachments-repository';
 import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-answer-comments-repository';
@@ -6,11 +8,19 @@ import { PrismaAnswersRepository } from './prisma/repositories/prisma-answers-re
 import { PrismaQuestionAttachmentsRepository } from './prisma/repositories/prisma-question-attachments-repository';
 import { PrismaQuestionCommentsRepository } from './prisma/repositories/prisma-question-comments-repository';
 import { PrismaQuestionsRepository } from './prisma/repositories/prisma-questions-repository';
+import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-repository';
 
 @Module({
 	providers: [//*repositorios injetados. Todo modulo que importar o DatabaseModule, ele podera injetar os respositories
 		PrismaService, 
-		PrismaQuestionsRepository,
+		{
+			provide: QuestionsRepository,
+			useClass: PrismaQuestionsRepository
+		},
+		{
+			provide: StudentsRepository,
+			useClass: PrismaStudentsRepository,
+		},
 		PrismaQuestionCommentsRepository,
 		PrismaQuestionAttachmentsRepository,
 		PrismaAnswersRepository,
@@ -22,12 +32,13 @@ import { PrismaQuestionsRepository } from './prisma/repositories/prisma-question
 	exports:[ 
 		PrismaService,
 		PrismaService, 
-		PrismaQuestionsRepository,
+		QuestionsRepository,
 		PrismaQuestionCommentsRepository,
 		PrismaQuestionAttachmentsRepository,
 		PrismaAnswersRepository,
 		PrismaAnswerCommentsRepository,
 		PrismaAnswerAttachmentsRepository,
+		StudentsRepository,
 	] 
 })
 export class DatabaseModule{}
