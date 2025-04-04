@@ -18,11 +18,11 @@ type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
 
 @Controller('/questions')
 export class FetchRecentQuestionsController {
-	constructor(private fetchRecentQuestionsService: FetchRecentQuestionsUseCase) {}
+	constructor(private fetchRecentQuestions: FetchRecentQuestionsUseCase) {}
 
 	@Get()
 	async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
-		const result = await this.fetchRecentQuestionsService.execute({page});
+		const result = await this.fetchRecentQuestions.execute({page,});
 
 		if (result.isLeft()) {
 			throw new BadRequestException();
@@ -30,6 +30,6 @@ export class FetchRecentQuestionsController {
 
 		const questions = result.value.questions;
 
-		return {questions:questions.map(QuestionPresenter.toHTTP)};
+		return { questions: questions.map(QuestionPresenter.toHTTP) };
 	}
 }

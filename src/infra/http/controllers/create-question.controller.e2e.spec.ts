@@ -10,10 +10,10 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service';
 describe('Create question (E2E)', () => {
 	let app: INestApplication;
 
+	let prisma: PrismaService;
+
 	let studentFactory: StudentFactory;
 
-	let prisma: PrismaService;
-	
 	let jwt: JwtService;
 
 	beforeAll(async () => {
@@ -29,9 +29,9 @@ describe('Create question (E2E)', () => {
 
 		app = moduleRef.createNestApplication();
 
-		studentFactory = moduleRef.get(StudentFactory);
-
 		prisma = moduleRef.get(PrismaService);
+
+		studentFactory = moduleRef.get(StudentFactory);
 
 		jwt = moduleRef.get(JwtService);
 
@@ -41,7 +41,7 @@ describe('Create question (E2E)', () => {
 	test('[POST] /questions', async () => {
 		const user = await studentFactory.makePrismaStudent();
 
-		const accessToken = jwt.sign({ sub: user.id });
+		const accessToken = jwt.sign({ sub: user.id.toString() });
 
 		const response = await request(app.getHttpServer())
 			.post('/questions')
