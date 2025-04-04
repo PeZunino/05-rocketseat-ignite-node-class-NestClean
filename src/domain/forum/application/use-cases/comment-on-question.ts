@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { Either, left, right } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
@@ -15,6 +16,7 @@ type CommentOnQuestionUseCaseResponse = Either<ResourceNotFoundError,{
 	questionComment: QuestionComment
 }>
 
+@Injectable()
 export class CommentOnQuestionUseCase {
 	constructor(
 		private questionsRepository: QuestionsRepository,
