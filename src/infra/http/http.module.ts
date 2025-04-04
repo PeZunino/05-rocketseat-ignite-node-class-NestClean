@@ -26,7 +26,7 @@ import { DeleteQuestionController } from './controllers/delete-question.controll
 import { DeleteQuestionCommentController } from './controllers/delete-question-comment.controller';
 import { EditAnswerController } from './controllers/edit-answer.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
-import { FetchQuestionAnswersController } from './controllers/fetch-question-answer.controller';
+import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller';
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller';
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
 
