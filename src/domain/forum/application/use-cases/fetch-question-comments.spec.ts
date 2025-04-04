@@ -1,18 +1,18 @@
 import { makeQuestionComment } from 'test/factories/make-question-comment';
 import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-question-comments-repository';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
-import { ListQuestionCommentsUseCase } from './list-question-comments';
+import { FetchQuestionCommentsUseCase } from './fetch-question-comments';
 
 let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository;
 
-let sut: ListQuestionCommentsUseCase;
+let sut: FetchQuestionCommentsUseCase;
 
-describe('List Question Comments', () => {
+describe('Fetch Question Comments', () => {
 	beforeEach(() => {
 		inMemoryQuestionCommentsRepository =
       new InMemoryQuestionCommentsRepository();
 
-		sut = new ListQuestionCommentsUseCase(inMemoryQuestionCommentsRepository);
+		sut = new FetchQuestionCommentsUseCase(inMemoryQuestionCommentsRepository);
 	});
 
 	it('should be able to list question comments', async () => {

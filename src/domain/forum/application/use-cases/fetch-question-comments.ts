@@ -1,23 +1,25 @@
+import { Injectable } from '@nestjs/common';
 import { Either, right } from '@/core/either';
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository';
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
 
-interface ListQuestionCommentsUseCaseRequest {
+interface FetchQuestionCommentsUseCaseRequest {
 	questionId: string
 	page: number
 }
 
-type ListQuestionCommentsUseCaseResponse = Either<null,{
+type FetchQuestionCommentsUseCaseResponse = Either<null,{
 	questionComments: QuestionComment[]
 }>
 
-export class ListQuestionCommentsUseCase {
+@Injectable()
+export class FetchQuestionCommentsUseCase {
 	constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
 
 	async execute({
 		questionId,
 		page,
-	}: ListQuestionCommentsUseCaseRequest): Promise<ListQuestionCommentsUseCaseResponse> {
+	}: FetchQuestionCommentsUseCaseRequest): Promise<FetchQuestionCommentsUseCaseResponse> {
 		const questionComments =
       await this.questionCommentsRepository.findManyByQuestionId(questionId, {page,});
 
