@@ -6,7 +6,7 @@ import { AnswerAttachmentList } from '../../enterprise/entities/answer-attachmen
 import { AnswersRepository } from '../repositories/answers-repository';
 
 interface AnswerQuestionUseCaseRequest{
-	instructorId:string
+	authorId:string
 	questionId:string
 	content:string
 	attachmentsIds: string[]
@@ -21,10 +21,10 @@ export class AnswerQuestionUseCase{
 	){}
 
 	async execute({
-		instructorId,questionId,content,attachmentsIds
+		authorId,questionId,content,attachmentsIds
 	}:AnswerQuestionUseCaseRequest):Promise<AnswerQuestionUseCaseResponse>{
 		const answer = Answer.create({
-			authorId: new UniqueEntityID(instructorId),
+			authorId: new UniqueEntityID(authorId),
 			questionId: new UniqueEntityID(questionId),
 			content
 		});

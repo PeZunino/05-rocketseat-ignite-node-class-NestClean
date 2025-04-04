@@ -25,7 +25,7 @@ describe('Create Answer', ()=>{
 	
 		const result = await sut.execute({
 			content: 'Nova resposta',
-			instructorId: '1',
+			authorId: '1',
 			questionId: '1',
 			attachmentsIds: [
 				'1', '2'
