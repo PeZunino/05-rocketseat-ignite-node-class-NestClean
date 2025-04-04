@@ -1,20 +1,20 @@
 import { makeAnswerComment } from 'test/factories/make-answer-comment';
 import { InMemoryAnswerCommentsRepository } from 'test/repositories/in-memory-answer-comments-repository';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
-import { ListAnswerCommentsUseCase } from './list-answer-comments';
+import { FetchAnswerCommentsUseCase } from './fetch-answer-comments';
 
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository;
 
-let sut: ListAnswerCommentsUseCase;
+let sut: FetchAnswerCommentsUseCase;
 
-describe('List Answer Comments', () => {
+describe('Fetch Answer Comments', () => {
 	beforeEach(() => {
 		inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository();
 
-		sut = new ListAnswerCommentsUseCase(inMemoryAnswerCommentsRepository);
+		sut = new FetchAnswerCommentsUseCase(inMemoryAnswerCommentsRepository);
 	});
 
-	it('should be able to list answer comments', async () => {
+	it('should be able to fetch answer comments', async () => {
 		await inMemoryAnswerCommentsRepository.create(
 			makeAnswerComment({answerId: new UniqueEntityID('answer-1'),}),
 		);
