@@ -47,8 +47,6 @@ export class ChooseQuestionBestAnswerUseCase {
 			return left(new NotAllowedError());
 		}
 
-		console.log(answer.id);
-
 		question.bestAnswerId = answer.id;
 
 		await this.questionsRepository.save(question);
