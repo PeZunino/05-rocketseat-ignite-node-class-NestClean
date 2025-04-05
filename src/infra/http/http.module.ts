@@ -37,6 +37,7 @@ import { FetchQuestionAnswersController } from './controllers/fetch-question-ans
 import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller';
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller';
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
+import { UploadAttachmentController } from './controllers/upload-attachment.controller';
 
 @Module({
 	imports:[
@@ -60,7 +61,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
 		CommentOnAnswerController,
 		DeleteAnswerCommentController,
 		FetchQuestionCommentsController,
-		FetchAnswerCommentsController
+		FetchAnswerCommentsController,
+		UploadAttachmentController
 	],
 	providers: [
 		CreateQuestionUseCase,
@@ -80,7 +82,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
 		CommentOnAnswerUseCase,
 		DeleteAnswerCommentUseCase,
 		FetchQuestionCommentsUseCase,
-		FetchAnswerCommentsUseCase
+		FetchAnswerCommentsUseCase,
+
 	],
 	
 })
