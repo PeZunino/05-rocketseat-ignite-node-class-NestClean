@@ -3,7 +3,7 @@
 
 #env
 .env
-*.pem
+.env.test
 
 # compiled output
 /dist

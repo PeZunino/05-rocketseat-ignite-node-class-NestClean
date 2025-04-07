@@ -8,6 +8,8 @@ import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 const createQuestionBodySchema = z.object({
 	content: z.string(),
 	title: z.string(),
+	attachments: z.array(z.string()
+		.uuid()),
 });
 
 const bodyValidationPipe = new ZodValidationPipe(createQuestionBodySchema);
@@ -27,14 +29,14 @@ export class CreateQuestionController{
 		@CurrentUser() user:UserPayload
 	){
 		const {
-			content,title
+			title, content, attachments 
 		} = body;
 
 		const userId = user.sub;
 
 		const result = await this.createQuestionUseCase.execute({
 			title,
-			attachmentsIds:[],
+			attachmentsIds: attachments,
 			authorId:userId,
 			content
 		});
